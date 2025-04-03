@@ -1,0 +1,12 @@
+debug/main.o
+debug/mainwindow.o
+debug/customview.o
+debug/xmlconfig.o
+debug/variablebindingdialog.o
+debug/componentfactory.o
+debug/componentdesigner.o
+debug/moc_mainwindow.o
+debug/moc_customview.o
+debug/moc_xmlconfig.o
+debug/moc_variablebindingdialog.o
+debug/moc_componentdesigner.o

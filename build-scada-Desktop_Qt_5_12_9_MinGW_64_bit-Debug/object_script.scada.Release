@@ -1,0 +1,12 @@
+release/main.o
+release/mainwindow.o
+release/customview.o
+release/xmlconfig.o
+release/variablebindingdialog.o
+release/componentfactory.o
+release/componentdesigner.o
+release/moc_mainwindow.o
+release/moc_customview.o
+release/moc_xmlconfig.o
+release/moc_variablebindingdialog.o
+release/moc_componentdesigner.o

@@ -1,0 +1,70 @@
+{
+    "items": [
+        {
+            "height": 0,
+            "width": 0,
+            "x": 10,
+            "y": 10
+        },
+        {
+            "binding": {
+                "accessMode": "read",
+                "address": "1",
+                "dataType": "float",
+                "updateRate": "1000",
+                "variableName": "压力"
+            },
+            "componentId": "Component_20250402114644260",
+            "height": 40,
+            "itemType": "ValueDisplay",
+            "width": 100,
+            "x": 369,
+            "y": 137
+        },
+        {
+            "height": 0,
+            "width": 0,
+            "x": 10,
+            "y": 10
+        },
+        {
+            "binding": {
+                "accessMode": "read",
+                "address": "0",
+                "dataType": "float",
+                "updateRate": "1000",
+                "variableName": "温度"
+            },
+            "componentId": "Component_20250402114643076",
+            "height": 40,
+            "itemType": "ValueDisplay",
+            "width": 100,
+            "x": 195,
+            "y": 138
+        },
+        {
+            "componentId": "Component_20250402114641212",
+            "height": 40,
+            "itemType": "Rectangle",
+            "width": 40,
+            "x": 379,
+            "y": 67
+        },
+        {
+            "componentId": "Component_20250402114640314",
+            "height": 60,
+            "itemType": "Ellipse",
+            "width": 60,
+            "x": 204,
+            "y": 63
+        },
+        {
+            "componentId": "Component_20250402114639499",
+            "height": 30,
+            "itemType": "Rectangle",
+            "width": 80,
+            "x": 266,
+            "y": 249
+        }
+    ]
+}

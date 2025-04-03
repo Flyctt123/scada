@@ -1,0 +1,17 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<components>
+    <component name="1" description="1" displayName="1">
+        <items>
+            <item height="60" scale="1" type="ellipse" posX="184" posY="118" x="0" width="100" y="0" rotation="0"/>
+            <item height="60" scale="1" type="rect" posX="106" posY="117" x="0" width="100" y="0" rotation="0"/>
+        </items>
+        <preview>iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAABJ0AAASdAHeZh94AAABtUlEQVR4nO3YT08TQRzG8W+3aEPEBiECEi8aExPScOBA4I34lo1y4WCiBhL1AkYPNdEaAVs4/Npw4VC6M5lu+v2cmqb7zGSf7p8ZkCRJkiRJkiRJkiRJkiRJkiRJupdWgTFfA8+AiwzZI+AdsAVsAMtANf6+Aq6B/8BP4Ay4yjCHWpYKjNkBjoBB4twu8IY48WfAKfD3jt89AJ4Cu+PP58C3xHNplF3gUcK8CtgDdoDDGY7fBg6IQhdSykI6wD7xT4fZCpnoAZu1Z1RTVXoCNbSIct+T5lnwAVgFniTImlmTC9kBPiXO/Ey8dBTT5EK6wO8MuSOgnSF3Kk0uZJQpd0C8LhfR5EJyWQH+lBq8yYV8AV4mzuyQZ8E6tSYX8oM4gesJM/eA44R599bkQgA+AmvAq5o5q8Qa5m3tGdVUYusktRPiKjkkVt1tYDjlsVvAC6DPHJQBZTYXe8Bj4F+G7OfAd26v/D7xTLggVvMPiYXfZGV/DnzNMI+ZlSikRdz7c7jk9nW4Im5FHaKIIVHML+Zwl1eSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEnSoroBdrYzejWu+WkAAAAASUVORK5CYII=</preview>
+    </component>
+    <component name="2" description="2" displayName="2">
+        <items>
+            <item height="60" scale="1" type="rect" posX="225" x="0" posY="134" width="100" y="0" rotation="0"/>
+            <item height="60" scale="1" type="rect" posX="118" x="0" posY="134" width="100" y="0" rotation="0"/>
+        </items>
+        <preview>iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAABJ0AAASdAHeZh94AAABWElEQVR4nO3YMWobQRQG4JfgOMJJTIqAGxe2QUgHSGNYEGp0gi1V7wHS6AILKty5VONGd1hyBLVWIxEskiagIqVDLBTIGazssLL9fdWr/nkwzF9MBAAAAAAAAAAAAAAAAMBz9arh899ExGGi7PuiKD5tNpvzbrf7OyJisVgc1TWv1+vbqqoe6l76oO7AR8oi4leC3I8R8SPLstF4PP7ZbrcfIiJms9nbOubVanWa5/ldVVXXCXZv1GWi3JOIuOj3+19ThJdl+bksyy8pspt+IU/Scrl8N5/PWymyX6cI3ReTyeRbitxOp3Of5/mfFNnP+kKKomg3vcNjqawdqKwdqaw9o7JeCJW1I5W1Z1TWC6GydvQUK6vp394sIv4myP0QEbe9Xu9qu90eT6fT78Ph8Cwioo651Wq9H41GN4PBYJpgdwAAAAAAAAAAAAAAAAAAAAAAAADg//0DD0SpeJX1sgQAAAAASUVORK5CYII=</preview>
+    </component>
+</components>

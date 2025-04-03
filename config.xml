@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <variables>
+        <variable name="温度" dataType="float" address="0" updateRate="1000" accessMode="read"/>
+        <variable name="压力" dataType="float" address="1" updateRate="1000" accessMode="read"/>
+        <variable name="流量" dataType="float" address="2" updateRate="500" accessMode="read"/>
+        <variable name="阀门开度" dataType="int" address="3" updateRate="100" accessMode="readwrite"/>
+        <variable name="泵状态" dataType="bool" address="4" updateRate="100" accessMode="readwrite"/>
+    </variables>
+    <bindings>
+    </bindings>
+</config>
