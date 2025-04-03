@@ -1464,6 +1464,10 @@ release/moc_componentdesigner.cpp: ../scada/componentdesigner.h \
 		E:/QT5.12.9/5.12.9/mingw73_64/include/QtWidgets/qlineedit.h \
 		E:/QT5.12.9/5.12.9/mingw73_64/include/QtGui/qtextcursor.h \
 		E:/QT5.12.9/5.12.9/mingw73_64/include/QtGui/qtextformat.h \
+		E:/QT5.12.9/5.12.9/mingw73_64/include/QtWidgets/QComboBox \
+		E:/QT5.12.9/5.12.9/mingw73_64/include/QtWidgets/qcombobox.h \
+		E:/QT5.12.9/5.12.9/mingw73_64/include/QtCore/QMap \
+		E:/QT5.12.9/5.12.9/mingw73_64/include/QtCore/QVariant \
 		release/moc_predefs.h \
 		E:/QT5.12.9/5.12.9/mingw73_64/bin/moc.exe
 	E:\QT5.12.9\5.12.9\mingw73_64\bin\moc.exe $(DEFINES) --include D:/test/scada/build-scada-Desktop_Qt_5_12_9_MinGW_64_bit-Debug/release/moc_predefs.h -IE:/QT5.12.9/5.12.9/mingw73_64/mkspecs/win32-g++ -ID:/test/scada/scada -IE:/QT5.12.9/5.12.9/mingw73_64/include -IE:/QT5.12.9/5.12.9/mingw73_64/include/QtCore -IE:/QT5.12.9/5.12.9/mingw73_64/include/QtGui -IE:/QT5.12.9/5.12.9/mingw73_64/include/QtWidgets -IE:/QT5.12.9/5.12.9/mingw73_64/include/QtXml -ID:/test/scada/common -IE:/QT5.12.9/5.12.9/mingw73_64/include -IE:/QT5.12.9/5.12.9/mingw73_64/include/QtWidgets -IE:/QT5.12.9/5.12.9/mingw73_64/include/QtGui -IE:/QT5.12.9/5.12.9/mingw73_64/include/QtANGLE -IE:/QT5.12.9/5.12.9/mingw73_64/include/QtXml -IE:/QT5.12.9/5.12.9/mingw73_64/include/QtCore -I. -IE:/QT5.12.9/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IE:/QT5.12.9/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IE:/QT5.12.9/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IE:/QT5.12.9/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IE:/QT5.12.9/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IE:/QT5.12.9/Tools/mingw730_64/x86_64-w64-mingw32/include ..\scada\componentdesigner.h -o release\moc_componentdesigner.cpp
@@ -3482,6 +3486,10 @@ release/componentdesigner.o: ../scada/componentdesigner.cpp ../scada/componentde
 		E:/QT5.12.9/5.12.9/mingw73_64/include/QtWidgets/qlineedit.h \
 		E:/QT5.12.9/5.12.9/mingw73_64/include/QtGui/qtextcursor.h \
 		E:/QT5.12.9/5.12.9/mingw73_64/include/QtGui/qtextformat.h \
+		E:/QT5.12.9/5.12.9/mingw73_64/include/QtWidgets/QComboBox \
+		E:/QT5.12.9/5.12.9/mingw73_64/include/QtWidgets/qcombobox.h \
+		E:/QT5.12.9/5.12.9/mingw73_64/include/QtCore/QMap \
+		E:/QT5.12.9/5.12.9/mingw73_64/include/QtCore/QVariant \
 		E:/QT5.12.9/5.12.9/mingw73_64/include/QtWidgets/QGraphicsRectItem \
 		E:/QT5.12.9/5.12.9/mingw73_64/include/QtWidgets/qgraphicsitem.h \
 		E:/QT5.12.9/5.12.9/mingw73_64/include/QtWidgets/QGraphicsEllipseItem \

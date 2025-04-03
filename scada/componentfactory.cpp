@@ -215,17 +215,38 @@ QGraphicsItem* ComponentFactory::createComponent(const QString &type, const QPoi
 QIcon ComponentFactory::createDefaultIcon(const QString &type)
 {
     if (type == "Button") {
-        QPixmap pixmap(100, 60);  // 增大尺寸
-        pixmap.fill(Qt::lightGray);
-        {
-            QPainter painter(&pixmap);
-            painter.setRenderHint(QPainter::Antialiasing);
-            painter.setPen(Qt::black);
-            painter.setBrush(QColor(200, 200, 200));
-            painter.drawRoundedRect(10, 10, 80, 40, 10, 10);  // 调整大小
-            painter.setFont(QFont("Arial", 12));  // 增大字体
-            painter.drawText(pixmap.rect(), Qt::AlignCenter, QObject::tr("按钮"));
-        }
+        // 创建一个较大的图标以显示更多细节
+        QPixmap pixmap(100, 100);
+        pixmap.fill(Qt::transparent);  // 使用透明背景
+        
+        QPainter painter(&pixmap);
+        painter.setRenderHint(QPainter::Antialiasing);
+        
+        // 定义按钮区域
+        QRectF buttonRect(10, 30, 80, 40);  // 调整位置和大小
+        
+        // 创建渐变背景
+        QLinearGradient gradient(buttonRect.topLeft(), buttonRect.bottomLeft());
+        gradient.setColorAt(0, QColor(240, 240, 240));  // 浅灰色顶部
+        gradient.setColorAt(1, QColor(220, 220, 220));  // 稍深灰色底部
+        
+        // 绘制按钮主体
+        painter.setPen(QPen(QColor(180, 180, 180)));  // 边框颜色
+        painter.setBrush(gradient);
+        painter.drawRoundedRect(buttonRect, 5, 5);  // 圆角矩形
+        
+        // 添加轻微的内阴影效果
+        painter.setPen(QPen(QColor(255, 255, 255, 80)));
+        painter.drawLine(
+            buttonRect.left() + 2, buttonRect.top() + 2,
+            buttonRect.right() - 2, buttonRect.top() + 2
+        );
+        
+        // 设置文本
+        painter.setPen(Qt::black);
+        painter.setFont(QFont("Microsoft YaHei", 12));  // 使用微软雅黑字体
+        painter.drawText(buttonRect, Qt::AlignCenter, QObject::tr("按钮"));
+        
         return QIcon(pixmap);
     }
     else if (type == "Gauge") {
@@ -430,4 +451,4 @@ QString ComponentFactory::getComponentDisplayName(const QString &type)
     return type;
 }
 
-// ... 其他组件的创建函数实现类似 ... 
+// ... 其他组件的创建函数实现类似 ...

@@ -20,6 +20,7 @@
 #include <QTextStream>
 #include <QDomProcessingInstruction>
 #include <QDebug>
+#include <QComboBox>
 #include "componentfactory.h"
 
 ComponentDesigner::ComponentDesigner(QWidget *parent)
@@ -80,7 +81,7 @@ void ComponentDesigner::createActions()
     connect(saveAction, &QAction::triggered, this, &ComponentDesigner::saveComponent);
 
     loadAction = new QAction(tr("加载组件"), this);
-    connect(loadAction, &QAction::triggered, this, &ComponentDesigner::loadComponent);
+    connect(loadAction, SIGNAL(triggered()), this, SLOT(loadComponent()));
 
     // 删除操作
     deleteAction = new QAction(tr("删除"), this);
@@ -118,6 +119,29 @@ void ComponentDesigner::createPropertyDock()
     componentDescEdit = new QLineEdit(widget);
     layout->addWidget(descLabel);
     layout->addWidget(componentDescEdit);
+
+    // 添加组件类别属性
+    QLabel *categoryLabel = new QLabel(tr("组件类别:"), widget);
+    categoryCombo = new QComboBox(widget);
+    
+    // 添加预定义的组件类别
+    categoryCombo->addItem(tr("基础控件"), "Basic");
+    categoryCombo->addItem(tr("仪表仪器"), "Instruments");
+    categoryCombo->addItem(tr("阀门管道"), "Valves");
+    categoryCombo->addItem(tr("容器设备"), "Containers");
+    categoryCombo->addItem(tr("自定义类别"), "Custom");
+    
+    // 设置默认类别
+    componentProperties["category"] = "Basic";
+    categoryCombo->setCurrentIndex(0);
+
+    // 使用 SIGNAL/SLOT 宏连接信号槽
+    connect(categoryCombo, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(onCategoryChanged(int)));
+
+    // 将类别选择器添加到布局中
+    layout->addWidget(categoryLabel);
+    layout->addWidget(categoryCombo);
 
     // 添加属性列表
     propertyList = new QListWidget(widget);
@@ -161,6 +185,12 @@ void ComponentDesigner::saveComponent()
     QString description = componentDescEdit->text().trimmed();
     if (description.isEmpty()) {
         description = tr("自定义组件");
+    }
+
+    // 获取组件类别
+    QString category = componentProperties["category"].toString();
+    if (category.isEmpty()) {
+        category = "Basic";  // 设置默认类别
     }
 
     // 保存组件到组件库
@@ -227,6 +257,13 @@ void ComponentDesigner::saveComponentToLibrary(const QString &name, const QStrin
     componentElem.setAttribute("name", name);
     componentElem.setAttribute("displayName", name);
     componentElem.setAttribute("description", description);
+    
+    // 添加类别属性
+    QString category = componentProperties["category"].toString();
+    if (category.isEmpty()) {
+        category = "Basic";  // 使用默认类别
+    }
+    componentElem.setAttribute("category", category);
 
     // 保存图形项
     QDomElement itemsElem = doc.createElement("items");
@@ -298,8 +335,19 @@ void ComponentDesigner::saveComponentToLibrary(const QString &name, const QStrin
         qDebug() << "Failed to create preview image";
     }
 
-    // 添加到根元素
+    // 将组件元素添加到根元素
     root.appendChild(componentElem);
+
+    // 删除之前可能存在的独立类别元素
+    QDomElement oldCategoryElement = root.firstChildElement("category");
+    if (!oldCategoryElement.isNull()) {
+        root.removeChild(oldCategoryElement);
+    }
+
+    // 添加类别信息到XML
+    QDomElement categoryElement = doc.createElement("category");
+    categoryElement.setAttribute("value", componentProperties["category"].toString());
+    root.appendChild(categoryElement);
 
     // 保存到文件
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
@@ -383,7 +431,58 @@ QPixmap ComponentDesigner::createComponentPreview()
 
 void ComponentDesigner::loadComponent()
 {
-    // 实现加载功能
+    loadComponent(QString());  // 调用带参数版本，传入空字符串
+}
+
+void ComponentDesigner::loadComponent(const QString &filename)
+{
+    // 如果没有提供文件名，弹出文件选择对话框
+    QString actualFilename = filename;
+    if (actualFilename.isEmpty()) {
+        actualFilename = QFileDialog::getOpenFileName(this,
+            tr("加载组件"), "",
+            tr("XML文件 (*.xml);;所有文件 (*)"));
+        
+        if (actualFilename.isEmpty()) {
+            return;  // 用户取消选择
+        }
+    }
+
+    QFile file(actualFilename);
+    if (!file.open(QIODevice::ReadOnly)) {
+        QMessageBox::warning(this, tr("错误"),
+            tr("无法打开文件：%1").arg(actualFilename));
+        return;
+    }
+
+    QDomDocument doc;
+    if (!doc.setContent(&file)) {
+        file.close();
+        QMessageBox::warning(this, tr("错误"),
+            tr("无法解析XML文件：%1").arg(actualFilename));
+        return;
+    }
+    file.close();
+
+    QDomElement root = doc.documentElement();
+    
+    // 获取组件元素
+    QDomElement componentElem = root.firstChildElement("component");
+    if (!componentElem.isNull()) {
+        // 读取类别信息
+        QString category = componentElem.attribute("category", "Basic");
+        componentProperties["category"] = category;
+        
+        // 更新类别下拉框
+        int index = categoryCombo->findData(category);
+        if (index != -1) {
+            categoryCombo->setCurrentIndex(index);
+        }
+        
+        // ... 继续加载其他组件信息 ...
+    }
+
+    emit propertiesChanged();  // 通知属性已更改
 }
 
 void ComponentDesigner::deleteSelected()
@@ -393,4 +492,11 @@ void ComponentDesigner::deleteSelected()
         scene->removeItem(item);
         delete item;
     }
+}
+
+void ComponentDesigner::onCategoryChanged(int index)
+{
+    QString category = categoryCombo->itemData(index).toString();
+    componentProperties["category"] = category;
+    emit propertiesChanged();
 } 

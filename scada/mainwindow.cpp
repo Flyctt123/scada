@@ -16,6 +16,8 @@
 #include <QDebug>
 #include "componentfactory.h"
 #include "componentdesigner.h"
+#include <QDomDocument>
+#include <QFile>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -48,42 +50,79 @@ void MainWindow::setupGraphicsView()
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);      // 隐藏垂直滚动条
     view->setDragMode(QGraphicsView::RubberBandDrag);    // 启用橡皮筋选择模式
 
+    // 初始化网格显示
+    showGrid = true;
+    
+    // 创建网格切换动作
+    toggleGridAction = new QAction(tr("显示网格"), this);
+    toggleGridAction->setCheckable(true);  // 使动作可选中
+    toggleGridAction->setChecked(showGrid);
+    connect(toggleGridAction, &QAction::triggered, this, [this](bool checked) {
+        showGrid = checked;
+        view->viewport()->update();  // 更新视图
+    });
+
+    // 自定义场景背景
+    scene->setBackgroundBrush(Qt::white);  // 设置白色背景
+    
+    // 重写视图的drawBackground函数来绘制网格
+    view->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+    
+    // 修改信号槽连接方式
+    connect(view, SIGNAL(backgroundNeedsPaint(QPainter*, const QRectF&)),
+            this, SLOT(drawBackground(QPainter*, const QRectF&)));
+
     setCentralWidget(view);    // 设置为主窗口的中央部件
 }
 
 void MainWindow::createComponentList()
 {
-    // 如果已经存在组件列表，直接返回
-    if (componentList) {
-        return;
-    }
-
     // 创建组件库面板
     componentDock = new QDockWidget(tr("组件库"), this);
-    componentList = new QListWidget(componentDock);
+    
+    // 将 QListWidget 替换为 QTreeWidget
+    componentTree = new QTreeWidget(componentDock);
+    componentTree->setHeaderHidden(true);  // 隐藏头部
+    componentTree->setIconSize(QSize(100, 100));
+    componentTree->setIndentation(20);  // 设置缩进
+    componentTree->setDragEnabled(true);
+    componentTree->setAcceptDrops(false);
+    componentTree->setMinimumWidth(150);
+    componentTree->setSelectionMode(QAbstractItemView::SingleSelection);
 
-    // 配置列表控件属性
-    componentList->setViewMode(QListWidget::IconMode);
-    componentList->setIconSize(QSize(100, 100));
-    componentList->setSpacing(10);
-    componentList->setMovement(QListWidget::Static);
-    componentList->setResizeMode(QListWidget::Adjust);
-    componentList->setDragEnabled(true);
-    componentList->setAcceptDrops(false);
-    componentList->setMinimumWidth(120);
-    componentList->setUniformItemSizes(true);
-    componentList->setWordWrap(true);
+    // 创建类别节点
+    QTreeWidgetItem *basicItem = new QTreeWidgetItem(componentTree, {tr("基础控件")});
+    QTreeWidgetItem *instrumentsItem = new QTreeWidgetItem(componentTree, {tr("仪表仪器")});
+    QTreeWidgetItem *valvesItem = new QTreeWidgetItem(componentTree, {tr("阀门管道")});
+    QTreeWidgetItem *containersItem = new QTreeWidgetItem(componentTree, {tr("容器设备")});
+    QTreeWidgetItem *customItem = new QTreeWidgetItem(componentTree, {tr("自定义类别")});
 
-    // 先添加默认组件
+    // 存储类别节点映射关系
+    categoryNodes.clear();
+    categoryNodes["Basic"] = basicItem;
+    categoryNodes["Instruments"] = instrumentsItem;
+    categoryNodes["Valves"] = valvesItem;
+    categoryNodes["Containers"] = containersItem;
+    categoryNodes["Custom"] = customItem;
+
+    // 添加默认组件
     QStringList defaultTypes = {"Button", "Gauge", "Valve", "ValueDisplay"};
     for (const QString &type : defaultTypes) {
         QString displayName = ComponentFactory::getComponentDisplayName(type);
-        QListWidgetItem *item = new QListWidgetItem(componentList);
-        item->setIcon(ComponentFactory::createComponentIcon(type));
-        item->setText(displayName);
-        item->setData(Qt::UserRole, type);
-        item->setSizeHint(QSize(120, 140));
-        item->setTextAlignment(Qt::AlignCenter);
+        QTreeWidgetItem *item = new QTreeWidgetItem();
+        item->setText(0, displayName);
+        item->setIcon(0, ComponentFactory::createComponentIcon(type));
+        item->setData(0, Qt::UserRole, type);
+        item->setSizeHint(0, QSize(120, 140));
+        item->setTextAlignment(0, Qt::AlignCenter);
+
+        // 根据组件类型添加到对应类别
+        QString category = getComponentCategory(type);
+        if (categoryNodes.contains(category)) {
+            categoryNodes[category]->addChild(item);
+        } else {
+            categoryNodes["Basic"]->addChild(item);  // 默认添加到基础控件
+        }
     }
 
     // 获取并添加自定义组件
@@ -94,28 +133,78 @@ void MainWindow::createComponentList()
             continue;
         }
         QString displayName = ComponentFactory::getComponentDisplayName(type);
-        QListWidgetItem *item = new QListWidgetItem(componentList);
-        item->setIcon(ComponentFactory::createComponentIcon(type));
-        item->setText(displayName);
-        item->setData(Qt::UserRole, type);
-        item->setSizeHint(QSize(120, 140));
-        item->setTextAlignment(Qt::AlignCenter);
+        QTreeWidgetItem *item = new QTreeWidgetItem();
+        item->setText(0, displayName);
+        item->setIcon(0, ComponentFactory::createComponentIcon(type));
+        item->setData(0, Qt::UserRole, type);
+        item->setSizeHint(0, QSize(120, 140));
+        item->setTextAlignment(0, Qt::AlignCenter);
+
+        // 获取组件类别并添加到对应节点
+        QString category = getComponentCategory(type);
+        if (categoryNodes.contains(category)) {
+            categoryNodes[category]->addChild(item);
+        } else {
+            categoryNodes["Custom"]->addChild(item);  // 未知类别添加到自定义类别
+        }
     }
 
-    connect(componentList, &QListWidget::itemPressed, this, &MainWindow::handleDragItem);
+    // 展开所有类别
+    componentTree->expandAll();
 
-    componentDock->setWidget(componentList);
+    // 连接拖拽信号
+    connect(componentTree, &QTreeWidget::itemPressed, this, &MainWindow::handleDragItem);
+
+    componentDock->setWidget(componentTree);
     addDockWidget(Qt::LeftDockWidgetArea, componentDock);
 }
 
-void MainWindow::handleDragItem(QListWidgetItem *item)
+// 添加获取组件类别的辅助函数
+QString MainWindow::getComponentCategory(const QString &type)
 {
+    // 从组件库文件中读取类别信息
+    QString filename = "components.xml";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadOnly)) {
+        QDomDocument doc;
+        if (doc.setContent(&file)) {
+            QDomElement root = doc.documentElement();
+            QDomNodeList components = root.elementsByTagName("component");
+            for (int i = 0; i < components.count(); i++) {
+                QDomElement component = components.at(i).toElement();
+                if (component.attribute("name") == type) {
+                    QString category = component.attribute("category", "Basic");
+                    file.close();
+                    return category;
+                }
+            }
+        }
+        file.close();
+    }
+
+    // 默认类别映射
+    QMap<QString, QString> defaultCategories;
+    defaultCategories["Button"] = "Basic";
+    defaultCategories["ValueDisplay"] = "Basic";
+    defaultCategories["Gauge"] = "Instruments";
+    defaultCategories["Valve"] = "Valves";
+
+    return defaultCategories.value(type, "Custom");
+}
+
+void MainWindow::handleDragItem(QTreeWidgetItem *item)
+{
+    // 如果是类别节点，不允许拖拽
+    if (item->parent() == nullptr) {
+        return;
+    }
+
     // 创建拖动对象
     QDrag *drag = new QDrag(this);
     QMimeData *mimeData = new QMimeData;
 
     // 设置要传输的数据
-    mimeData->setText(item->data(Qt::UserRole).toString());
+    mimeData->setText(item->data(0, Qt::UserRole).toString());
     drag->setMimeData(mimeData);
 
     // 设置拖动时的预览图像
@@ -164,6 +253,10 @@ void MainWindow::createActions()
     toolBar->addAction(bindingAction);
     toolBar->addAction(addComponentAction);
     toolBar->addAction(importLibraryAction);  // 恢复导入组件库按钮
+
+    // 添加网格切换动作到工具栏
+    toolBar->addSeparator();  // 添加分隔符
+    toolBar->addAction(toggleGridAction);
 }
 
 void MainWindow::saveToFile()
@@ -443,19 +536,26 @@ void MainWindow::importComponentLibrary()
     
     if (!filename.isEmpty()) {
         // 清空现有组件列表
-        componentList->clear();
+        componentTree->clear();
 
         // 先添加默认组件
         QStringList defaultTypes = {"Button", "Gauge", "Valve", "ValueDisplay"};
         for (const QString &type : defaultTypes) {
             QString displayName = ComponentFactory::getComponentDisplayName(type);
-            QListWidgetItem *item = new QListWidgetItem(componentList);
-            QIcon icon = ComponentFactory::createComponentIcon(type);
-            item->setIcon(icon);
-            item->setText(displayName);
-            item->setData(Qt::UserRole, type);
-            item->setSizeHint(QSize(120, 140));
-            item->setTextAlignment(Qt::AlignCenter);
+            QTreeWidgetItem *item = new QTreeWidgetItem();
+            item->setText(0, displayName);
+            item->setIcon(0, ComponentFactory::createComponentIcon(type));
+            item->setData(0, Qt::UserRole, type);
+            item->setSizeHint(0, QSize(120, 140));
+            item->setTextAlignment(0, Qt::AlignCenter);
+
+            // 根据组件类型添加到对应类别
+            QString category = getComponentCategory(type);
+            if (categoryNodes.contains(category)) {
+                categoryNodes[category]->addChild(item);
+            } else {
+                categoryNodes["Basic"]->addChild(item);  // 默认添加到基础控件
+            }
         }
 
         // 加载自定义组件库
@@ -470,14 +570,20 @@ void MainWindow::importComponentLibrary()
                     continue;
                 }
                 QString displayName = ComponentFactory::getComponentDisplayName(type);
-                QListWidgetItem *item = new QListWidgetItem(componentList);
-                QIcon icon = ComponentFactory::createComponentIcon(type);
-                qDebug() << "Icon sizes for" << type << ":" << icon.availableSizes();
-                item->setIcon(icon);
-                item->setText(displayName);
-                item->setData(Qt::UserRole, type);
-                item->setSizeHint(QSize(120, 140));
-                item->setTextAlignment(Qt::AlignCenter);
+                QTreeWidgetItem *item = new QTreeWidgetItem();
+                item->setText(0, displayName);
+                item->setIcon(0, ComponentFactory::createComponentIcon(type));
+                item->setData(0, Qt::UserRole, type);
+                item->setSizeHint(0, QSize(120, 140));
+                item->setTextAlignment(0, Qt::AlignCenter);
+
+                // 获取组件类别并添加到对应节点
+                QString category = getComponentCategory(type);
+                if (categoryNodes.contains(category)) {
+                    categoryNodes[category]->addChild(item);
+                } else {
+                    categoryNodes["Custom"]->addChild(item);  // 未知类别添加到自定义类别
+                }
             }
 
             QMessageBox::information(this, tr("成功"),
@@ -485,6 +591,29 @@ void MainWindow::importComponentLibrary()
         } else {
             QMessageBox::warning(this, tr("错误"),
                 tr("导入组件库失败：%1").arg(filename));
+        }
+    }
+}
+
+void MainWindow::drawBackground(QPainter *painter, const QRectF &rect)
+{
+    if (showGrid) {
+        // 设置网格线的样式
+        painter->setPen(QPen(QColor(200, 200, 200), 1, Qt::SolidLine));
+        
+        // 计算网格大小（这里使用20像素的网格）
+        const int gridSize = 20;
+        
+        // 绘制垂直线
+        qreal left = int(rect.left()) - (int(rect.left()) % gridSize);
+        for (qreal x = left; x < rect.right(); x += gridSize) {
+            painter->drawLine(QPointF(x, rect.top()), QPointF(x, rect.bottom()));
+        }
+        
+        // 绘制水平线
+        qreal top = int(rect.top()) - (int(rect.top()) % gridSize);
+        for (qreal y = top; y < rect.bottom(); y += gridSize) {
+            painter->drawLine(QPointF(rect.left(), y), QPointF(rect.right(), y));
         }
     }
 }

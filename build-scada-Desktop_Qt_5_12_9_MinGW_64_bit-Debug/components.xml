@@ -1,17 +1,33 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
 <components>
-    <component name="1" description="1" displayName="1">
+    <component displayName="1" category="Basic" description="1" name="1">
         <items>
-            <item height="60" scale="1" type="ellipse" posX="184" posY="118" x="0" width="100" y="0" rotation="0"/>
-            <item height="60" scale="1" type="rect" posX="106" posY="117" x="0" width="100" y="0" rotation="0"/>
+            <item posY="81" x="0" width="100" posX="95" type="ellipse" rotation="0" y="0" height="60" scale="1"/>
+            <item posY="100" x="0" width="100" posX="56" type="rect" rotation="0" y="0" height="60" scale="1"/>
         </items>
-        <preview>iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAABJ0AAASdAHeZh94AAABtUlEQVR4nO3YT08TQRzG8W+3aEPEBiECEi8aExPScOBA4I34lo1y4WCiBhL1AkYPNdEaAVs4/Npw4VC6M5lu+v2cmqb7zGSf7p8ZkCRJkiRJkiRJkiRJkiRJkiRJupdWgTFfA8+AiwzZI+AdsAVsAMtANf6+Aq6B/8BP4Ay4yjCHWpYKjNkBjoBB4twu8IY48WfAKfD3jt89AJ4Cu+PP58C3xHNplF3gUcK8CtgDdoDDGY7fBg6IQhdSykI6wD7xT4fZCpnoAZu1Z1RTVXoCNbSIct+T5lnwAVgFniTImlmTC9kBPiXO/Ey8dBTT5EK6wO8MuSOgnSF3Kk0uZJQpd0C8LhfR5EJyWQH+lBq8yYV8AV4mzuyQZ8E6tSYX8oM4gesJM/eA44R599bkQgA+AmvAq5o5q8Qa5m3tGdVUYusktRPiKjkkVt1tYDjlsVvAC6DPHJQBZTYXe8Bj4F+G7OfAd26v/D7xTLggVvMPiYXfZGV/DnzNMI+ZlSikRdz7c7jk9nW4Im5FHaKIIVHML+Zwl1eSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEnSoroBdrYzejWu+WkAAAAASUVORK5CYII=</preview>
+        <preview>iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAABJ0AAASdAHeZh94AAADAklEQVR4nO3ZwUuTcRzH8ffz5EptjRCmbqXCpFoZJJKEXryIId08iHrYWUhP07P4B8hzVLopMk8S7CLe7NRBoToIM3RU4GNmRWQQZds6TGmETVfPntz4vGDwPNvv9/09P757nu/vt4GIiIiIiIiIiIiIiIiIiIiISKEMtwaamJioBM43NzenALa2ts796bi6ujoTCATS+drkHBuTk5Nf3JpHsVW4NVAoFHo0Ojq6NT4+/gPAsqyKsbGx1M7OTsPs7GxtJBJ57/P5PszMzBxEo9Hvm5ubpmVZVZFIxLe/v+9fXFw8iEajLz0ez4FlWRVHcTY2NtqWlpaivb29r9yaS1no6el5nHPqAVqBe8CVU4aoAdoO+3iP3pyamno4Nzd326nr/N9cu0Ny1AFBIAF8LaDfx8OXCdwEfgAbsVjM29nZ6c3bs4S4lpDl5eXnhmEEgUrg2T+ESgPrQC1wbWho6Ivf71cN+U0rUJWvQVdX131gE0iSvUtO4wLZO+ntMZ+9AzLJZDLk9/ufFHCtZ5pTCakCnuZrkMlkTGCB7Df8tGoAP8cnBGBvZWXFME2zbB5ZplsDTU9Pv6CwZJzKwMDAdktLSyG16ExzLSEjIyPX3RqrlLmWkHQ6XUkRFhELCwsN6+vreetXKXEtIfF4fAW45XDYQHd397f29vayWWW5lpD+/v4wsAvccChkPVDV1NT0xqF4Z4JrCTm0C+wBd8nZbRfIA9w57J+MxWLe1dXVslllub0xhOxu+xPQAlSTTdBrIHVCiADQwK+N4VcAbQz/UkdHx4NAIOCzbftzMBj0Adi2/bmuri6USqXq4/H4Xl9f3zfDML4nEolP4XDYl06nL83Pz3sHBwcvmab50bbtRGNjo/eobzAY9K2trYWHh4fjbs2jVHQUKW4NztWckuB2DZETKCFnjFM1pBK46lCsXJc5udiXFaf+wr1I9nlfDNsU4TcwERERERERERERERERERERERERERERERERERERERERERERERERERERERERERGR0vYTrmjbTdEKEOEAAAAASUVORK5CYII=</preview>
     </component>
-    <component name="2" description="2" displayName="2">
+    <component displayName="2" category="Instruments" description="2" name="2">
         <items>
-            <item height="60" scale="1" type="rect" posX="225" x="0" posY="134" width="100" y="0" rotation="0"/>
-            <item height="60" scale="1" type="rect" posX="118" x="0" posY="134" width="100" y="0" rotation="0"/>
+            <item posY="109" x="0" width="100" posX="185" type="ellipse" rotation="0" y="0" height="60" scale="1"/>
+            <item posY="80" x="0" width="100" posX="74" type="rect" rotation="0" y="0" height="60" scale="1"/>
         </items>
-        <preview>iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAABJ0AAASdAHeZh94AAABWElEQVR4nO3YMWobQRQG4JfgOMJJTIqAGxe2QUgHSGNYEGp0gi1V7wHS6AILKty5VONGd1hyBLVWIxEskiagIqVDLBTIGazssLL9fdWr/nkwzF9MBAAAAAAAAAAAAAAAAMBz9arh899ExGGi7PuiKD5tNpvzbrf7OyJisVgc1TWv1+vbqqoe6l76oO7AR8oi4leC3I8R8SPLstF4PP7ZbrcfIiJms9nbOubVanWa5/ldVVXXCXZv1GWi3JOIuOj3+19ThJdl+bksyy8pspt+IU/Scrl8N5/PWymyX6cI3ReTyeRbitxOp3Of5/mfFNnP+kKKomg3vcNjqawdqKwdqaw9o7JeCJW1I5W1Z1TWC6GydvQUK6vp394sIv4myP0QEbe9Xu9qu90eT6fT78Ph8Cwioo651Wq9H41GN4PBYJpgdwAAAAAAAAAAAAAAAAAAAAAAAADg//0DD0SpeJX1sgQAAAAASUVORK5CYII=</preview>
+        <preview>iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAABJ0AAASdAHeZh94AAADNElEQVR4nO3ZwUscZxzG8a9108ZVy+gadiOBsCRVsomxKg2rtL2s7iG1Cv0HrPTiwT8gnsRL9OTFQ+4et3jQSwXxINRdobBE1IuEtknRaqq7pM2EbnWdHGYDEgipm3mZXXg+MDDLzjzzvvvjnXnfWRARERERERERERERERERERERuagaQ7lBoNlQ9gFwaijbdx8Zyr2HW2yvt3rgjqE2V4SAodwC8IeB3HrghoHcimFqhEiZVJAKo4JUGBWkwph6qBs3Ozs7nslkvkskEk8BVldXr7/ZX1lZuRGPx4+KxWIgk8lcjcfjB0DNxsZGuK+vbz8QCJyk0+krAwMDv7597vLy8s18Pv9wbW3tJ986Z0Cvodx64C7A3Nzco7e+qwN6Ste+CTS+I6MGd410u3RsjHN3CsdxrjuO872nrb6Aqh0hS0tL4XMfY8DHwCbvXzQ6QK60ATTgFvIQeDY+Ph5Jp9Phd51sWtU+Q4aGhg5Lu/dw1zyPKW8F/xL4BSgCbd60rnxVW5CSLtxC/ONB1h6Qb2pqqstms4fvPdqQqi3I4uLiVeBv4D8PY/9aX19v7e7u1i3ropLJ5AvgN69zLcvKOY7j2+9i6qH+EjMzrUvA7wDFYrEWOPP6AiMjI3u9vb3RcNi3QVKd+vv7F3Ff83tqcHDw266urgde5/5fVXvLGh4e3gdueZ2by+UiuFNjX1RtQUr28PZ1fM/09PTPmmWVobQwPABe4a7eP6Qvl4E+YDuVSn2qWVYZzi0M/wSeAF/gFqbuAjEhoBtoB9K4f6z5qtbvBpQrkUgMhUKhxq2trcbd3d14R0dH08LCAtls9odoNPrl5OTktbOzs3gsFvt8fn4+fHR09HV7e3vPzMxM9Pj4+JvW1tb7ExMTV4LBYEtnZ2eolPNVJBL5LJVK5aemph770a+qHSGbm5tztm03AI22bTfYtt3Q1tZW29LS8sSyrL3R0dHnQM3JycknlmUFC4VC3enp6aVkMvkqGAy+aG5ufjo2NrZfKBQun8/Z3t7+d2dn50efuyciIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiwGuhveZjSWhMkAAAAABJRU5ErkJggg==</preview>
     </component>
+    <component displayName="3" category="Custom" description="3" name="3">
+        <items>
+            <item posY="116" x="0" width="100" posX="105" type="rect" rotation="0" y="0" height="60" scale="1"/>
+            <item posY="99" x="0" width="100" posX="168" type="rect" rotation="0" y="0" height="60" scale="1"/>
+            <item posY="80" x="0" width="100" posX="51" type="rect" rotation="0" y="0" height="60" scale="1"/>
+        </items>
+        <preview>iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAABJ0AAASdAHeZh94AAABdUlEQVR4nO3ZPUsDMRzH8a/PQ+0VFREHX4I4KfT9D+rm4uAmiOjo4NIHW4e7ghRa7s7ES+z3AzccTf935EeSJgVJkiRJkiRJkiRJkiSpqa0ANQZAP0CdZXPgNULdpG0HqHFDGWzo6wI4D/B+WdkNUOMTeAlQZ9lOhJrJCzFCFJCBJCbElPVXroACmEaoPQPuI9RtLKdA9oA7YBKh9jBCzVacshLTxQjZBw5rtBsAY2BU3RfAMetHyAfl9JOtLgIZAu812p1Qdv6ig4+AU1YH0qMM7/G3L9ilLgIZA0812o2q662671ffWxVIQbmZzJprSGIMJDEGkpgQa8icZr/jL2u261HuOzZKiEDadNptgOf+S05ZiTGQxOR0ljUFroGvFZ/3gDPqnQIkK6dAHlg/ohcbwzY79WSOW3IKBNZ33OzHlS3XkMR0MUImxPn/4QB4jlBXkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkrQ5vgHWSyqkRF9vbwAAAABJRU5ErkJggg==</preview>
+    </component>
+    <component displayName="4" category="Containers" description="4" name="4">
+        <items>
+            <item posY="0" x="0" width="100" posX="0" type="ellipse" y="0" height="60" rotation="0" scale="1"/>
+            <item posY="0" x="0" width="100" posX="0" type="rect" y="0" height="60" rotation="0" scale="1"/>
+        </items>
+        <preview>iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAABJ0AAASdAHeZh94AAABf0lEQVR4nO3YTS9DQRSA4Zc0WhFsWCD1kS4EkVih1n62H4DEkoWVDRIREk0lvspirqgyLe3cze37JE2mc3PPmczJve0ckCRJhTASmd8GrjvmloFZ4AV4Ah6z8SswBpSBCaAEvAPnQLMjxipwkGDdQ6faNl4HdoG5f9xfATaBOjDZNl8ffGnDqQqMAnt839B+rANL2diC9GmJtJs3D6wkjllIo5H5LeAoYZ4rwu9LJWHMQooVpAm0Euc6Izwl6iJWkIcccrW65FMmtkF5vVosSA+xDZrKIdcMcJdD3EKJFeQGWEycqwZcJo5ZOLGCXGfXaglylAkHy5MEsQqv2zv9AmgAO8B0n/E3gDXgkNBiUQ+lHtdvss8a4cTdIJwp7gn9qk4VQr9rIft+mt2jP4o1F/f52RgEGCds+CRfT9fn39l34JlQrFt+L9gbcDzAeiVJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJKoYPrpguRt7Ai6gAAAAASUVORK5CYII=</preview>
+    </component>
+    <category value="Containers"/>
 </components>

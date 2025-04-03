@@ -53,3 +53,9 @@ void CustomView::dropEvent(QDropEvent *event)
         event->acceptProposedAction();
     }
 }
+
+void CustomView::drawBackground(QPainter *painter, const QRectF &rect)
+{
+    QGraphicsView::drawBackground(painter, rect);
+    emit backgroundNeedsPaint(painter, rect);
+}
